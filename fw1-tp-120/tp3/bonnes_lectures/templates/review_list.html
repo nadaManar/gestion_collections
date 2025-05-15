@@ -1,0 +1,6 @@
+<h3>Reviews for {{ book.title }}</h3>
+<ul>
+    {% for review in reviews %}
+        <li>{{ review.user.username }}: {{ review.rating }} stars - {{ review.text }}</li>
+    {% endfor %}
+</ul>

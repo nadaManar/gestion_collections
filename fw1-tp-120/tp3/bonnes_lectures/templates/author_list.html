@@ -1,0 +1,15 @@
+
+{% extends 'base.html' %}
+{% block content %}
+<h2>Liste des auteurs</h2>
+<a href="{% url 'author_add' %}">Ajouter un nouvel auteur</a>
+<ul>
+    {% for author in authors %}
+    <li>
+        {{ author.first_name }} {{ author.last_name }}
+        <a href="{% url 'author_edit' author.id %}">Modifier</a>
+        <a href="{% url 'author_delete' author.id %}">Supprimer</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

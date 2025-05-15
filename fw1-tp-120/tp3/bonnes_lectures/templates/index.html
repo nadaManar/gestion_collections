@@ -1,0 +1,61 @@
+{% load django_bootstrap5 %}
+{% block bootstrap5_content %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+
+
+<div class="container">
+    <h1>{% block title %}(no title){% endblock %}</h1>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'base' %}">Page principale</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'book_list' %}">Collections</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'new_book' %}">Ajouter une nouvelle Collection</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'welcome' %}">À propos</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{% url 'author_list' %}">Auteurs</a>
+                </li>
+            </ul>
+
+            <!-- Connexion/Déconnexion -->
+            {% if user.is_authenticated %}
+                <span class="navbar-text float-end p-2">{{ user.username }}</span>
+                <!-- Formulaire de déconnexion avec méthode POST -->
+                <form action="{% url 'logout' %}" method="post" class="float-end">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-secondary">Déconnexion</button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-secondary float-end" role="button">Connexion</a>
+            {% endif %}
+            <form method="post" action="{% url 'set_language' %}">
+                {% csrf_token %}
+                <select name="language" onchange="this.form.submit()">
+                    <option value="fr" {% if LANGUAGE_CODE == 'fr' %}selected{% endif %}>Français</option>
+                    <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>English</option>
+                </select>
+            </form>
+            
+        </div>
+        
+        
+    </nav>
+
+    {% autoescape off %}
+    {% bootstrap_messages %}
+    {% endautoescape %}
+
+    {% block content %}(no content){% endblock %}
+</div>
+
+{% endblock %}

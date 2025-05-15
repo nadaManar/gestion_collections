@@ -1,0 +1,16 @@
+
+*.pyc
+__pycache__/
+
+
+tp3/db.sqlite3
+
+
+tp3/bonnes_lectures/migrations/
+
+**/__pycache__/
+
+# Logs
+*.log
+
+*.env

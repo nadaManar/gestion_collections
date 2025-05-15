@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1>Modifier le livre: {{ book.title }}</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Enregistrer les modifications</button>
+    </form>
+
+    <br>
+    <a href="{% url 'book_list' %}">Retour à la liste des livres</a>
+    {% endblock %}
